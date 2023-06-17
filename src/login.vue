@@ -36,7 +36,10 @@
           </el-checkbox-group>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('loginForm')"
+          <el-button
+            type="primary"
+            @click="submitForm('loginForm')"
+            v-loading.fullscreen.lock="fullscreenLoading"
             >登录</el-button
           >
         </el-form-item>
@@ -75,21 +78,26 @@ export default {
         ],
         agree: [{ required: true, message: '请勾选此选项', trigger: 'change' }],
       },
+      //全屏加载效果
+      fullscreenLoading: false,
     }
   },
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
+          this.fullscreenLoading = true
           delete this.loginForm.agree
-          console.log(this.loginForm)
+          // console.log(this.loginForm)
           loginFun(this.loginForm)
             .then(({ data: res }) => {
+              this.fullscreenLoading = false
               if (res.message !== 'OK') return this.$message.error(res.message)
               this.$message.success('登录成功')
               console.log(res.data)
             })
             .catch((error) => {
+              this.fullscreenLoading = false
               this.$message.error('手机号或验证码错误')
               console.log(error)
             })

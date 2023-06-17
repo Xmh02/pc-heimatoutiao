@@ -99,10 +99,10 @@ export default {
             .catch((error) => {
               this.fullscreenLoading = false
               this.$message.error('手机号或验证码错误')
-              console.log(error)
+              // console.log(error)
             })
         } else {
-          console.log('error submit!!')
+          // console.log('error submit!!')
           return false
         }
       })

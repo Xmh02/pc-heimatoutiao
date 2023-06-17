@@ -1,15 +1,17 @@
 <template>
-  <div>6</div>
+  <div class="box">
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'App',
+}
 </script>
 
 <style lang="less" scoped>
-div {
-  width: 200px;
-  height: 200px;
-  background-color: pink;
+.box {
+  height: 100%;
 }
 </style>

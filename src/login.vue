@@ -53,8 +53,8 @@ export default {
   data() {
     return {
       loginForm: {
-        mobile: '',
-        code: '',
+        mobile: '13911111111',
+        code: '246810',
         agree: false,
       },
       loginrules: {
@@ -104,6 +104,7 @@ export default {
               this.fullscreenLoading = false
               if (res.message !== 'OK') return this.$message.error(res.message)
               this.$message.success('登录成功')
+              this.$router.push('/main')
               console.log(res.data)
             })
             .catch((error) => {

@@ -98,14 +98,14 @@ export default {
         if (valid) {
           this.fullscreenLoading = true
           delete this.loginForm.agree
-          // console.log(this.loginForm)
           loginFun(this.loginForm)
             .then(({ data: res }) => {
               this.fullscreenLoading = false
               if (res.message !== 'OK') return this.$message.error(res.message)
-              this.$message.success('登录成功')
+              this.$store.commit('updateToken', res.data.token)
               this.$router.push('/main')
-              console.log(res.data)
+              this.$message.success('登录成功')
+              console.log('登录功能返回的数据', res.data)
             })
             .catch((error) => {
               this.fullscreenLoading = false

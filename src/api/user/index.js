@@ -11,3 +11,11 @@ export const loginFun = ({ mobile, code }) => {
     },
   })
 }
+
+//获取-用户资料
+export const getUserData = () => {
+  return request({
+    method: 'GET',
+    url: '/mp/v1_0/user/profile',
+  })
+}

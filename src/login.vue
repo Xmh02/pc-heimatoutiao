@@ -28,12 +28,10 @@
           <i class="el-icon-circle-check"></i>
         </el-form-item>
         <el-form-item prop="agree">
-          <el-checkbox-group v-model="loginForm.agree">
-            <el-checkbox
-              label="我已阅读并同意用户协议和隐私条款"
-              name="agree"
-            ></el-checkbox>
-          </el-checkbox-group>
+          <el-checkbox
+            label="我已阅读并同意用户协议和隐私条款"
+            v-model="loginForm.agree"
+          ></el-checkbox>
         </el-form-item>
         <el-form-item>
           <el-button
@@ -57,7 +55,7 @@ export default {
       loginForm: {
         mobile: '',
         code: '',
-        agree: [],
+        agree: false,
       },
       loginrules: {
         mobile: [
@@ -76,7 +74,19 @@ export default {
             trigger: 'blur',
           },
         ],
-        agree: [{ required: true, message: '请勾选此选项', trigger: 'change' }],
+        agree: [
+          {
+            validator: (rule, value, callback) => {
+              // console.log(rule, value)
+              if (value) {
+                callback()
+              } else {
+                callback(new Error('请勾选此选项'))
+              }
+            },
+            trigger: 'change',
+          },
+        ],
       },
       //全屏加载效果
       fullscreenLoading: false,

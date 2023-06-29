@@ -19,7 +19,17 @@
           <el-dropdown>
             <div class="el-dropdown-link">
               <!-- 用户头像 -->
-              <img :src="user.photo" alt="" class="user-avatar" />
+              <!-- <img :src="user.photo" alt="" class="user-avatar" /> -->
+              <el-image
+                class="user-avatar"
+                :src="user.photo ? user.photo : ''"
+                fit="cover"
+              >
+                <!-- 加载失败展示的图片 -->
+                <div slot="error" class="image-slot">
+                  <img src="@/assets/images/404.jpg" alt="" />
+                </div>
+              </el-image>
               <span>
                 {{ user.name }}<i class="el-icon-arrow-down el-icon--right"></i>
               </span>
@@ -60,6 +70,7 @@ export default {
     this.getUserdata()
   },
   methods: {
+    //获取用户信息
     async getUserdata() {
       const { data: res } = await getUserData()
       this.user = res.data
@@ -98,5 +109,16 @@ export default {
 }
 .el-icon-arrow-down {
   font-size: 12px;
+}
+</style>
+
+<style lang="less">
+.image-slot {
+  width: 100%;
+  height: 100%;
+  img {
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>
